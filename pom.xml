@@ -164,20 +164,17 @@
             <version>${gatling.version}</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.scala-lang</groupId>-->
-<!--            <artifactId>scala-library</artifactId>-->
-<!--            <version>2.13.11</version> &lt;!&ndash; Choose the appropriate version &ndash;&gt;-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.gatling</groupId>
             <artifactId>gatling-http-java</artifactId>
             <version>${gatling.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.alchim31.maven</groupId>
             <artifactId>scala-maven-plugin</artifactId>
             <version>4.9.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -203,12 +200,52 @@
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>4.9.0</version>
+                <executions>
+                    <execution>
+                        <id>gatling-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>*com.companyledgertwo.performance.FullAppSimulation</include>  <!-- Includes any simulation files -->
+                            </includes>
+                            <failOnError>true</failOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version> <!-- Ensure to use the latest version available -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.5.1</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
-                    <includes>
-                        <include>**/*Simulation.scala</include>
-                    </includes>
-                    <failOnError>true</failOnError>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/mydatabase</url>
+                    <username>username</username>
+                    <password>yourpassword</password>
+                    <srcFiles>
+                        <srcFile>src/main/resources/postgres-test-data.sql</srcFile>
+                    </srcFiles>
+                    <autocommit>true</autocommit>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>initialize-database</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
