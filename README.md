@@ -20,7 +20,7 @@ CompanyLedgerTwo is an application for financial management created using Spring
 - **Run Application**: Execute `mvn spring-boot:run` to start the application.
 - **Unit Tests**: Run `mvn test` to execute the unit tests.
 - **Integration Tests**: Execute `mvn verify` to perform integration tests.
-- **Performance Tests**: Run `mvn gatling:test` or `mvn verify` for performance testing.
+- **Performance Tests**: Run `mvn gatling:test` or `mvn verify` for performance testing (make sure app is running before running perfomance test).
 - **API Access**: Access the Swagger UI at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html) to interact with the API.
 
 ## Support

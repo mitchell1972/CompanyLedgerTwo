@@ -46,7 +46,7 @@ public class FullAppSimulation extends Simulation {
             // Create Transaction
             .exec(http("Create Transaction")
                     .post("/transactions")
-                    .body(StringBody("{\"accountId\":1,\"date\":\"" + LocalDate.now() + "\",\"amount\":100.0}"))
+                    .body(StringBody("{\"accountId\":1,\"date\":\"" + LocalDate.now() + "\",\"amount\":100.50}"))
                     .asJson()
                     .check(status().is(200)))
             .pause(1)
@@ -57,12 +57,12 @@ public class FullAppSimulation extends Simulation {
             .pause(1)
             // Get Transactions Greater Than
             .exec(http("Transactions Greater Than $100")
-                    .get("/transactions/greaterThan?amount=100")
+                    .get("/transactions/greaterThan?amount=100.50")
                     .check(status().is(200)))
             .pause(1)
             // Get Transactions Less Than
             .exec(http("Transactions Less Than $500")
-                    .get("/transactions/lessThan?amount=500")
+                    .get("/transactions/lessThan?amount=499.99")
                     .check(status().is(200)))
             .pause(1)
             // Get Transactions Between Dates
