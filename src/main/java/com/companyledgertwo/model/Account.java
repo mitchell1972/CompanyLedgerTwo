@@ -12,14 +12,14 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Account name cannot be empty") // Ensures the account name is not blank
+    @NotBlank(message = "Account name cannot be empty")
     private String accountName;
 
-    @NotNull(message = "Balance cannot be null") // Ensures that a balance value is provided
-    @Min(value = 0, message = "Balance cannot be negative") // Ensures the balance is not negative
+    @NotNull(message = "Balance cannot be null")
+    @Min(value = 0, message = "Balance cannot be negative")
     private Double balance;
 
-    @NotNull(message = "Active status cannot be null") // Ensures that an active status is provided
+    @NotNull(message = "Active status cannot be null")
     private Boolean isActive; // Add this line
 
     // Constructors
