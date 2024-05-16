@@ -30,7 +30,7 @@ public class FullAppSimulation extends Simulation {
                     .asJson()
                     .check(status().is(200))
                     .check(jsonPath("$.id").saveAs("accountId")))
-            .pause(1)
+            .pause(2)
             // Get Account
             .exec(http("Get Account")
                     .get("/api/accounts/1")
